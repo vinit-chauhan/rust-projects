@@ -13,5 +13,9 @@ async fn main() {
     let client: Clients = Arc::new(Mutex::new(HashMap::new()));
     let health_route = warp::path!("health").and_then(handler::health_handler);
 
-    println!("finished...");
+    let register = warp::path("register");
+    let register_route = register
+        .and(warp::post())
+        .and(warp::body::json())
+        .and_then(handler::register_handler);
 }
