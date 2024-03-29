@@ -3,50 +3,50 @@ use serde_derive::{Deserialize, Serialize};
 
 #[allow(unused)]
 #[derive(Deserialize, Serialize)]
-struct Input {
-    xml_file: String,
-    json_file: String,
+pub struct Input {
+    pub xml_file: String,
+    pub json_file: String,
 }
 
 #[allow(unused)]
 #[derive(Deserialize, Serialize)]
-struct Redis {
-    host: String,
+pub struct Redis {
+    pub host: String,
 }
 
 #[allow(unused)]
 #[derive(Deserialize, Serialize)]
-struct SQLite {
-    db_file: String,
+pub struct SQLite {
+    pub db_file: String,
 }
 
 #[allow(unused)]
 #[derive(Deserialize, Serialize)]
-struct PostgreSQL {
-    username: String,
-    password: String,
-    host: String,
-    port: String,
-    database: String,
+pub struct PostgreSQL {
+    pub username: String,
+    pub password: String,
+    pub host: String,
+    pub port: String,
+    pub database: String,
 }
 
 #[allow(unused)]
 #[derive(Deserialize, Serialize)]
-struct Config {
-    input: Input,
-    redis: Redis,
-    sqlite: SQLite,
-    postgresql: PostgreSQL,
+pub struct Config {
+    pub input: Input,
+    pub redis: Redis,
+    pub sqlite: SQLite,
+    pub postgresql: PostgreSQL,
 }
 
-pub fn read(path: &str) {
+pub fn read(path: &str) -> Config {
     let config: Config = {
         let config_string: String =
             std::fs::read_to_string(path).expect("Unable to read config file".red().as_str());
         toml::from_str(&config_string).unwrap()
     };
 
-    println!("[postgresql].database: {}", config.postgresql.database)
+    config
 }
 
 pub fn write(path: &str, formatted: bool) {
