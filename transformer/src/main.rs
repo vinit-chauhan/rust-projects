@@ -1,7 +1,6 @@
-pub mod toml_dynamic;
-pub mod toml_static;
+pub mod my_toml;
 
-use toml_static::*;
+use self::my_toml::use_static::*;
 
 fn main() {
     let path: String = std::env::args()
