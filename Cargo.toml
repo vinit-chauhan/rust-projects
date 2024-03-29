@@ -5,5 +5,3 @@ members = [
     "transformer",
     "web-socket",
 ]
-
-[workspace.dependencies]
