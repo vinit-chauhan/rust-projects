@@ -8,6 +8,7 @@ edition = "2021"
 [dependencies]
 chrono = "0.4.37"
 colorize = "0.1.0"
+redis = "0.25.3"
 rusqlite = "0.31.0"
 serde = "1.0.197"
 serde_derive = "1.0.197"
