@@ -3,7 +3,7 @@ pub mod my_toml;
 pub mod output;
 pub mod types;
 
-use std::time::SystemTime;
+use std::time::{SystemTime, UNIX_EPOCH};
 
 use colorize::AnsiColor;
 use rusqlite::Result;
@@ -39,10 +39,26 @@ fn main() -> Result<()> {
         }
     };
 
-    db.add_prod("Category", "some item 1")?;
-    let now = SystemTime::now();
+    db.add_prod("Category", "some item 1")
+        .expect("Unable to add data to table Products".redb().as_str());
 
-    db.add_sale(1, now.elapsed().unwrap().as_secs(), 1.2, "some unit")?;
+    db.add_sale(
+        1,
+        SystemTime::now()
+            .duration_since(UNIX_EPOCH)
+            .unwrap()
+            .as_micros(),
+        1.2,
+        "some unit",
+    )
+    .expect("Unable to add data to table Sales".redb().as_str());
 
+    // let sale = db.get_sale_by_id(1)?;
+    // dbg!(&sale);
+
+    // let prod = db.get_prod_by_id(1)?;
+    // dbg!(&prod);
+
+    db.print_db()?;
     Ok(())
 }
