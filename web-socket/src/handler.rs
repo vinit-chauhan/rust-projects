@@ -11,6 +11,7 @@ pub fn health_handler() -> impl Future<Output = Result<impl Reply>> {
     futures::future::ready(Ok(StatusCode::OK))
 }
 
+#[allow(unused)]
 pub async fn register_handler(body: RegisterRequest, clients: Clients) -> Result<impl Reply> {
     let user_id = body.user_id;
     let uuid = Uuid::new_v4().simple().to_string();
@@ -21,6 +22,7 @@ pub async fn register_handler(body: RegisterRequest, clients: Clients) -> Result
     }))
 }
 
+#[allow(unused)]
 async fn register_client(id: String, user_id: usize, clients: Clients) {
     clients.lock().unwrap().insert(
         id,
