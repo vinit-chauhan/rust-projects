@@ -2,7 +2,6 @@
 resolver = "2"
 members = [ 
     "tcp-server",
-    "transformer", 
-    "udp-socket",
+    "transformer",
     "web-socket",
 ]
