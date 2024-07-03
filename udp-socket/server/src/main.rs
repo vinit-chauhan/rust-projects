@@ -1,11 +1,20 @@
+extern crate libc;
+
 use std::net::UdpSocket;
 use std::str::from_utf8;
 use std::{io, process::exit};
 
 use logger::{LogType, Logger};
 
+extern "C" {
+    fn random_number() -> libc::c_int;
+}
+
 fn main() {
     let mut logger = Logger::init("server.log");
+
+    let secret: i32 = unsafe { random_number() };
+    println!("SECRET: {secret}");
 
     let socket: UdpSocket = match initialize() {
         Ok(socket) => {
